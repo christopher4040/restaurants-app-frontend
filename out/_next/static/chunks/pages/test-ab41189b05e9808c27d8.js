@@ -1,0 +1,1 @@
+_N_E=(window.webpackJsonp_N_E=window.webpackJsonp_N_E||[]).push([[16],{FCuQ:function(o,n){var l=function(){return"Hello World"};console.log("Hello World"),n.hello=l},"zl3/":function(o,n,l){(window.__NEXT_P=window.__NEXT_P||[]).push(["/test",function(){return l("FCuQ")}])}},[["zl3/",0]]]);
