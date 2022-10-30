@@ -16,55 +16,62 @@ import {
 import router, { useRouter } from "next/router";
 
 function RestaurantList(props) {
-  const {restaurant, setRestaurant, dishes} = useContext(AppContext);
+  const { restaurant, setRestaurant, dishes } = useContext(AppContext);
   console.log(dishes);
   const [restaurantID, setRestaurantID] = useState(-1);
 
   useEffect(() => {
     if (Object.keys(restaurant).length > 0) {
-    window.localStorage.setItem('RESTAURANT', JSON.stringify(restaurant));
-      router.push('/restaurant/' + restaurant.id);
+      window.localStorage.setItem("RESTAURANT", JSON.stringify(restaurant));
+      router.push("/restaurant/" + restaurant.id);
     }
   }, [restaurant]);
-  
+
   const GET_RESTAURANTS = gql`
     query {
       restaurants {
-        id
-        name
-        description
-        image {
-          url
+        data {
+          id
+          attributes {
+            name
+            description
+            image {
+              data {
+                id
+                attributes {
+                  url
+                }
+              }
+            }
+          }
         }
       }
     }
   `;
 
   const GET_RESTAURANT_DISHES = gql`
-  query($id: ID!) {
-    restaurant(id: $id) {
-      id
-      name
-      dishes {
+    query ($id: ID!) {
+      restaurant(id: $id) {
         id
         name
-        description
-        price
-        image {
-          url
+        dishes {
+          id
+          name
+          description
+          price
+          image {
+            url
+          }
         }
       }
     }
-  }
-`;
-
+  `;
 
   const { loading, error, data } = useQuery(GET_RESTAURANTS);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>ERROR</p>;
   if (!data) return <p>Not found</p>;
   console.log(`Query Data: ${data.restaurants}`);
-
 
   let searchQuery =
     data.restaurants.filter((res) => {
@@ -73,9 +80,9 @@ function RestaurantList(props) {
 
   const handleRestaurant = (res) => {
     // setRestaurantID(resID)
-    setRestaurant(res)
+    setRestaurant(res);
     // router.push(restaurantID)
-  }
+  };
 
   // define renderer for Dishes
   // const renderDishes = () => {
@@ -85,7 +92,7 @@ function RestaurantList(props) {
   //   if (loadingDishes) return <p>Loading...</p>;
   //   if (errorDishes) return <p>ERROR</p>;
   //   if (!dataDishes) return <p>Not found dishes</p>;
-    
+
   //   console.log(`Dishes: ${dataDishes}`);
   // };
 
@@ -94,7 +101,7 @@ function RestaurantList(props) {
       <Col style={{ textAlign: "center" }} xs="12" sm="6" lg="4" key={res.id}>
         <Button
           onClick={() => {
-            handleRestaurant(res)
+            handleRestaurant(res);
             // setRestaurantID(res.id)
           }}
           className="p-0 border-0"
@@ -123,7 +130,7 @@ function RestaurantList(props) {
                 {res.name}
               </Button> */}
 
-              {/* <Modal isOpen={dishesModal} toggle={() => handleShowModal(false)}>
+            {/* <Modal isOpen={dishesModal} toggle={() => handleShowModal(false)}>
                 <ModalHeader toggle={() => handleShowModal(false)} close={closeBtn}>
                   {rest.length != 0 ? rest[0].name : ""}
                 </ModalHeader>
