@@ -16,7 +16,7 @@ function Home() {
   const [query, setQuery] = useState("");
   const link = new HttpLink({ uri: `${API_URL}/graphql` });
   const cache = new InMemoryCache();
-  const client = new ApolloClient({ link, cache });
+  const client = new ApolloClient({ link, cache, introspection: true });
 
   return (
     <ApolloProvider client={client}>
