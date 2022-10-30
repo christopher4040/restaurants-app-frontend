@@ -61,7 +61,10 @@ function RestaurantList(props) {
 
   const { loading, error, data } = useQuery(GET_RESTAURANTS);
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>ERROR</p>;
+  if (error) {
+    console.log(error);
+    return <p>Error fetching data</p>
+  }
   if (!data) return <p>Not found</p>;
   console.log(`Query Data: ${data.restaurants}`);
 
