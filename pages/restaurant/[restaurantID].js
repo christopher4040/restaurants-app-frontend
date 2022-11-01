@@ -34,7 +34,7 @@ function Restaurant() {
     // console.log("Data ::::::::" + data)
     // if ( data !== null ) setRestaurant(JSON.parse(data));
   }, [restaurant])
-
+  const restName = restaurant.attributes.name;
   const renderDishes = () => {
     return <Dishes restaurantID={restaurantID} search={query}></Dishes>
   };
@@ -55,7 +55,7 @@ function Restaurant() {
             }}
           ></ion-icon>
         </a>
-        <h3 style={{ marginTop: "10px", marginLeft: 0, color: "rgba(0,0,0,.8)" }}>{}</h3>
+        <h3 style={{ marginTop: "10px", marginLeft: 0, color: "rgba(0,0,0,.8)" }}>{restName}</h3>
       </Container>
       <Container>
         <h3></h3>
