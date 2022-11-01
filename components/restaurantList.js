@@ -73,12 +73,12 @@ function RestaurantList(props) {
     return <p>Error fetching data</p>;
   }
   if (!data) return <p>Not found</p>;
-  console.log(`Query Data: ${data.restaurants}`);
+  console.log(`Query Data: ${data}`);
 
-  let searchQuery =
-    data.restaurants.filter((res) => {
-      return res.name.toLowerCase().includes(props.search);
-    }) || [];
+  // let searchQuery =
+  //   data.restaurants.filter((res) => {
+  //     return res.name.toLowerCase().includes(props.search);
+  //   }) || [];
 
   const handleRestaurant = (res) => {
     // setRestaurantID(resID)
@@ -98,58 +98,58 @@ function RestaurantList(props) {
   //   console.log(`Dishes: ${dataDishes}`);
   // };
 
-  if (searchQuery.length > 0) {
-    const restList = searchQuery.map((res) => (
-      <Col style={{ textAlign: "center" }} xs="12" sm="6" lg="4" key={res.id}>
-        <Button
-          onClick={() => {
-            handleRestaurant(res);
-            // setRestaurantID(res.id)
-          }}
-          className="p-0 border-0"
-        >
-          <Card
-            color="light"
-            style={{
-              minWidth: "245px",
-              maxWidth: "275px",
-            }}
-          >
-            <CardImg
-              top={true}
-              style={{ height: 200 }}
-              src={`http://localhost:1337` + res.image.url}
-            />
+  // if (searchQuery.length > 0) {
+  //   const restList = searchQuery.map((res) => (
+  //     <Col style={{ textAlign: "center" }} xs="12" sm="6" lg="4" key={res.id}>
+  //       <Button
+  //         onClick={() => {
+  //           handleRestaurant(res);
+  //           // setRestaurantID(res.id)
+  //         }}
+  //         className="p-0 border-0"
+  //       >
+  //         <Card
+  //           color="light"
+  //           style={{
+  //             minWidth: "245px",
+  //             maxWidth: "275px",
+  //           }}
+  //         >
+  //           <CardImg
+  //             top={true}
+  //             style={{ height: 200 }}
+  //             src={`http://localhost:1337` + res.image.url}
+  //           />
 
-            {/* <div className="card-footer text-center">
-              <Button
-                color="primary"
-                className="w-75"
-                onClick={() => {
-                  setRestaurantID(res.id), toggle();
-                }}
-              >
-                {res.name}
-              </Button> */}
+  //           {/* <div className="card-footer text-center">
+  //             <Button
+  //               color="primary"
+  //               className="w-75"
+  //               onClick={() => {
+  //                 setRestaurantID(res.id), toggle();
+  //               }}
+  //             >
+  //               {res.name}
+  //             </Button> */}
 
-            {/* <Modal isOpen={dishesModal} toggle={() => handleShowModal(false)}>
-                <ModalHeader toggle={() => handleShowModal(false)} close={closeBtn}>
-                  {rest.length != 0 ? rest[0].name : ""}
-                </ModalHeader>
-                <ModalBody>
-                  <span style={{ color: "rgba(0,0,0,.6)" }}>
-                    {rest.length != 0 ? rest[0].description : ""}
-                  </span>
-                  <br />
-                  <br />
-                  <Row xs="3">{renderDishes(restaurantID)}</Row>
-                </ModalBody>
-              </Modal> */}
-            {/* </div> */}
-          </Card>
-        </Button>
-      </Col>
-    ));
+  //           {/* <Modal isOpen={dishesModal} toggle={() => handleShowModal(false)}>
+  //               <ModalHeader toggle={() => handleShowModal(false)} close={closeBtn}>
+  //                 {rest.length != 0 ? rest[0].name : ""}
+  //               </ModalHeader>
+  //               <ModalBody>
+  //                 <span style={{ color: "rgba(0,0,0,.6)" }}>
+  //                   {rest.length != 0 ? rest[0].description : ""}
+  //                 </span>
+  //                 <br />
+  //                 <br />
+  //                 <Row xs="3">{renderDishes(restaurantID)}</Row>
+  //               </ModalBody>
+  //             </Modal> */}
+  //           {/* </div> */}
+  //         </Card>
+  //       </Button>
+  //     </Col>
+  //   ));
 
     return (
       <Container>
@@ -160,8 +160,8 @@ function RestaurantList(props) {
         {/* <Row xs="3">{renderDishes(restaurantID)}</Row> */}
       </Container>
     );
-  } else {
-    return <h1> No Restaurants Found</h1>;
-  }
+  // } else {
+  //   return <h1> No Restaurants Found</h1>;
+  // }
 }
 export default RestaurantList;
