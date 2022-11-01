@@ -63,8 +63,7 @@ function Login(props) {
                   {Object.keys(error).length > 0 && (
                     <div style={{ marginBottom: 10 }}>
                       <small style={{ color: "red" }}>
-                      {console.log(error)}
-                        {/* {error.response.data.message} */}
+                        {error.response.data.message}
                       </small>
                     </div>
                   )}
