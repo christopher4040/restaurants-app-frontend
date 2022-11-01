@@ -22,6 +22,7 @@ function Restaurant() {
   const cache = new InMemoryCache();
   const client = new ApolloClient({ link, cache });
   const {restaurant, setRestaurant} = useContext(AppContext);
+  const [name, setName] = useState('')
 
   // useEffect(() => {
   //   window.localStorage.setItem('RESTAURANT', JSON.stringify(restaurant));
@@ -30,11 +31,11 @@ function Restaurant() {
     console.log(":::::: Restaurant ::::::")
     console.log(restaurant)
     console.log(restaurant.attributes.name)
+    setName(restaurant.attributes.name);
     // const data = window.localStorage.getItem('RESTAURANT');
     // console.log("Data ::::::::" + data)
     // if ( data !== null ) setRestaurant(JSON.parse(data));
   }, [restaurant])
-  const restName = restaurant.attributes.name;
   const renderDishes = () => {
     return <Dishes restaurantID={restaurantID} search={query}></Dishes>
   };
@@ -55,7 +56,7 @@ function Restaurant() {
             }}
           ></ion-icon>
         </a>
-        <h3 style={{ marginTop: "10px", marginLeft: 0, color: "rgba(0,0,0,.8)" }}>{restName}</h3>
+        <h3 style={{ marginTop: "10px", marginLeft: 0, color: "rgba(0,0,0,.8)" }}>{name}</h3>
       </Container>
       <Container>
         <h3></h3>
