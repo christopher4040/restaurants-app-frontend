@@ -54,7 +54,7 @@ function Restaurant() {
             }}
           ></ion-icon>
         </a>
-        <h3 style={{ marginTop: "10px", marginLeft: 0, color: "rgba(0,0,0,.8)" }}>{restaurant.attributes.name ? restaurant.attributes.name : 'Loading'}</h3>
+        <h3 style={{ marginTop: "10px", marginLeft: 0, color: "rgba(0,0,0,.8)" }}>{restaurant.data.attributes.name}</h3>
       </Container>
       <Container>
         <h3></h3>
