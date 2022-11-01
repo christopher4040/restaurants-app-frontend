@@ -28,7 +28,7 @@ function Restaurant() {
   // }, [restaurant])
   useEffect(() => {
     console.log(":::::: Restaurant ::::::")
-    console.log(restaurant)
+    console.log(restaurant.data)
     // const data = window.localStorage.getItem('RESTAURANT');
     // console.log("Data ::::::::" + data)
     // if ( data !== null ) setRestaurant(JSON.parse(data));
@@ -54,7 +54,7 @@ function Restaurant() {
             }}
           ></ion-icon>
         </a>
-        <h3 style={{ marginTop: "10px", marginLeft: 0, color: "rgba(0,0,0,.8)" }}>{restaurant.data.attributes.name}</h3>
+        <h3 style={{ marginTop: "10px", marginLeft: 0, color: "rgba(0,0,0,.8)" }}>{}</h3>
       </Container>
       <Container>
         <h3></h3>
