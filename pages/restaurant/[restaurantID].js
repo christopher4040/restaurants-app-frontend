@@ -29,7 +29,7 @@ function Restaurant() {
   useEffect(() => {
     console.log(":::::: Restaurant ::::::")
     console.log(restaurant)
-    console.log(restaurant.attributes)
+    console.log(restaurant.attributes.name)
     // const data = window.localStorage.getItem('RESTAURANT');
     // console.log("Data ::::::::" + data)
     // if ( data !== null ) setRestaurant(JSON.parse(data));
