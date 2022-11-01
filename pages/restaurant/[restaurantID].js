@@ -32,7 +32,7 @@ function Restaurant() {
     // const data = window.localStorage.getItem('RESTAURANT');
     // console.log("Data ::::::::" + data)
     // if ( data !== null ) setRestaurant(JSON.parse(data));
-  }, [])
+  }, [restaurant])
 
   const renderDishes = () => {
     return <Dishes restaurantID={restaurantID} search={query}></Dishes>
@@ -54,14 +54,14 @@ function Restaurant() {
             }}
           ></ion-icon>
         </a>
-        <h3 style={{ marginTop: "10px", marginLeft: 0, color: "rgba(0,0,0,.8)" }}>{restaurant.name}</h3>
+        <h3 style={{ marginTop: "10px", marginLeft: 0, color: "rgba(0,0,0,.8)" }}>{restaurant.attributes.name ? restaurant.attributes.name : 'Loading'}</h3>
       </Container>
       <Container>
         <h3></h3>
       </Container>
       <Container className="mt-5">
       <div className="search my-5">
-        <h6 className="text-center">Search for dishes from {restaurant.name}</h6>
+        <h6 className="text-center">Search for dishes</h6>
         <InputGroup className="mx-auto" style={{ maxWidth: "600px" }}>
           <InputGroupText addontype="append"> Search </InputGroupText>
           <Input
