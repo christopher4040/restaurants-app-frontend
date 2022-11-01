@@ -27,9 +27,10 @@ function Restaurant() {
   //   window.localStorage.setItem('RESTAURANT', JSON.stringify(restaurant));
   // }, [restaurant])
   useEffect(() => {
-    const data = window.localStorage.getItem('RESTAURANT');
-    console.log("Data ::::::::" + data)
-    if ( data !== null ) setRestaurant(JSON.parse(data));
+    console.log(restaurant)
+    // const data = window.localStorage.getItem('RESTAURANT');
+    // console.log("Data ::::::::" + data)
+    // if ( data !== null ) setRestaurant(JSON.parse(data));
   }, [])
 
   const renderDishes = () => {
