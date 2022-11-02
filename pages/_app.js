@@ -48,13 +48,14 @@ function MyApp(props) {
       temp.quantity = 1;
       var newCart = {
         items: [...state.cart.items, temp],
-        total: state.cart.total + item.price,
+        total: state.cart.total + item.attributes.price,
       };
       setState({ cart: newCart });
-      console.log(`Total items: ${JSON.stringify(newCart)}`);
+      // console.log(`Total items: ${JSON.stringify(newCart)}`);
     } else {
       // we already have it so just increase quantity ++
-      console.log(`Total so far:  ${state.cart.total}`);
+      console.log("Adding to cart");
+      console.log(state.cart.items);
       newCart = {
         items: items.map((item) => {
           if (item.id === foundItem.id) {
@@ -63,7 +64,7 @@ function MyApp(props) {
             return item;
           }
         }),
-        total: state.cart.total + item.price,
+        total: state.cart.total + item.attributes.price,
       };
     }
     setState({ cart: newCart }); // problem is this is not updated yet
@@ -83,7 +84,7 @@ function MyApp(props) {
             return item;
           }
         }),
-        total: state.cart.total - item.price,
+        total: state.cart.total - item.attributes.price,
       };
       //console.log(`NewCart after remove: ${JSON.stringify(newCart)}`)
     } else {

@@ -18,21 +18,33 @@ function Dishes({ restaurantID, search }) {
   
 
   const GET_RESTAURANT_DISHES = gql`
-    query ($id: ID!) {
-      restaurant(id: $id) {
+  query($id: ID!) {
+    restaurant(id: $id) {
+      data {
         id
-        name
-        dishes {
-          id
+        attributes {
           name
-          description
-          price
-          image {
-            url
+          dishes {
+            data {
+              id
+              attributes {
+                name
+                description
+                price
+                image {
+                  data {
+                    attributes {
+                      url
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     }
+  }
   `;
 
   const { loading, error, data } = useQuery(GET_RESTAURANT_DISHES, {
@@ -46,11 +58,11 @@ function Dishes({ restaurantID, search }) {
 
   const router = useRouter();
 
-  let restaurant = data.restaurant;
-  console.log(search + ' :: ' + restaurant.dishes)
+  let dishes = data.restaurant.data.attributes.dishes;
+  console.log(dishes)
   let searchQuery =
-    restaurant.dishes.filter((res) => {
-      return res.name.toLowerCase().includes(search);
+    dishes.data.filter((res) => {
+      return res.attributes.name.toLowerCase().includes(search);
     }) || [];
 
   if (searchQuery.length > 0) {
@@ -64,14 +76,14 @@ function Dishes({ restaurantID, search }) {
                 <CardImg
                   top={true}
                   style={{ height: 150, width: 150 }}
-                  src={`http://localhost:1337${res.image.url}`}
+                  src={res.attributes.image.data[0].attributes.url}
                 />
-                  <CardTitle style={{ margin: "20px 10px" }}><h5>{res.name}</h5><h5>Price: <a style={{color: "#0d6efd"}}>${res.price}</a></h5></CardTitle>
+                  <CardTitle style={{ margin: "20px 10px" }}><h5>{res.attributes.name}</h5><h5>Price: <a style={{color: "#0d6efd"}}>${res.attributes.price}</a></h5></CardTitle>
                 </Container>
                 
 
                 <CardBody>
-                  <CardText>{res.description}</CardText>
+                  <CardText>{res.attributes.description}</CardText>
                 </CardBody>
                 <div className="card-footer text-end">
                   <Button outline color="primary" onClick={() => addItem(res)}>

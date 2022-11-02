@@ -72,7 +72,7 @@ function Restaurant() {
           />
         </InputGroup>
       </div>
-      {/* <Row xs="3">{renderDishes()}</Row> */}
+      <Row xs="3">{renderDishes()}</Row>
 
       </Container>
     </ApolloProvider>

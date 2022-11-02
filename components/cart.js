@@ -14,15 +14,15 @@ function Cart(props) {
 
   const toggle = props.toggle;
 
-  console.log(`in CART: ${JSON.stringify(cart)}`);
+  // console.log(`in CART: ${JSON.stringify(cart)}`);
 
   //   problem is that cart may not be set
   const router = useRouter();
   let { items } = cart;
-  console.log(`Router Path: ${JSON.stringify(router)}`);
+  // console.log(`Router Path: ${JSON.stringify(router)}`);
   const renderItems = () => {
-    console.log(`items: ${JSON.stringify(items)}`);
-    console.log(`Total Items: ${totalItems}`);
+    console.log(items);
+    // console.log(`Total Items: ${totalItems}`);
 
     var itemList = cart.items.map((item) => {
       if (item.quantity > 0) {
@@ -34,11 +34,11 @@ function Cart(props) {
                   <td style={{ width: "0" }}>
                     <img
                       height={64}
-                      src={`http://localhost:1337` + item.image.url}
+                      src={item.attributes.image.data[0].attributes.url}
                     ></img>
                   </td>
                   <td>
-                    <span id="item-name">&nbsp; {item.name}</span>
+                    <span id="item-name">&nbsp; {item.attributes.name}</span>
                     
                     <br></br>
                     <span>&nbsp; Qty:</span>
@@ -84,7 +84,7 @@ function Cart(props) {
                       style={{ marginLeft: 5, fontSize: 18 }}
                       id="item-quantity"
                     >
-                      ${item.price * item.quantity}
+                      ${item.attributes.price * item.quantity}
                     </span>
                   </td>
                 </tr>
