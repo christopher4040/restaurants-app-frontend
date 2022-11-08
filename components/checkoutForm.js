@@ -42,7 +42,7 @@ function CheckoutForm(props) {
 
     // Charge Stripe
     const chargeResponse = await fetch(
-      "http://localhost:3000/api/chargeStripe",
+      API_URL+"/api/chargeStripe",
       {
         method: "POST",
         headers: {
