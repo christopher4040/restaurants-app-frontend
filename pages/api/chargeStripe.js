@@ -11,7 +11,6 @@ export default async function handler(req, res) {
         source: "tok_amex",
         description: `Order ${new Date()} by ${req.body.data.user}`,
       });
-
       return res.status(200).json({
         message: "Success",
         charge,
