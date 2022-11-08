@@ -46,7 +46,6 @@ function CheckoutForm(props) {
       `${PAGE_URL}/api/chargeStripe`,
       {
         method: "POST",
-        mode: "cors",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${userToken}`,
