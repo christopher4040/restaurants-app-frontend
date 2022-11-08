@@ -36,16 +36,16 @@ function CheckoutForm(props) {
     // // e.g. createToken - https://stripe.com/docs/js/tokens_sources/create_token?type=cardElement
     // get token back from stripe to process credit card
     const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
+    const PAGE_URL = process.env.PAGE_URL
 
     const token = await stripe.createToken(cardElement);
     const userToken = Cookies.get("token");
 
     // Charge Stripe
     const chargeResponse = await fetch(
-      API_URL+"/api/chargeStripe",
+      +"/api/chargeStripe",
       {
         method: "POST",
-        mode: "cors",
         headers: {
           "Content-Type": "application/json",
         },
