@@ -20,9 +20,7 @@ function Checkout() {
   //const isAuthenticated  = true;
 
   // load stripe to inject into elements components
-  const stripePromise = loadStripe(
-    "pk_test_51LoFubCzea9b9xKE6OpaRDNrsWTWSE12ZiaADgAx8tb39QnKzAdOeo8v2IZ1FFJX3GDF7G9CJ3c1zSv3gbQmQGPp00CUlarmgA"
-  );
+  const stripePromise = loadStripe("pk_test_51LoFubCzea9b9xKE6OpaRDNrsWTWSE12ZiaADgAx8tb39QnKzAdOeo8v2IZ1FFJX3GDF7G9CJ3c1zSv3gbQmQGPp00CUlarmgA");
 
   return (
     <>

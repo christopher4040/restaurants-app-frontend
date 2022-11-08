@@ -39,16 +39,40 @@ function CheckoutForm(props) {
 
     const token = await stripe.createToken(cardElement);
     const userToken = Cookies.get("token");
+
+    // Charge Stripe
+    const chargeResponse = await fetch(
+      "http://localhost:3000/api/chargeStripe",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          data: {
+            amount: Number(Math.round(appContext.cart.total + "e2") + "e-2"),
+            user: appContext.user ? appContext.user.email : 'Guest',
+          },
+        }),
+      }
+    );
+
     const response = await fetch(`${API_URL}/api/orders`, {
       method: "POST",
-      headers: userToken && { Authorization: `Bearer ${userToken}` },
+      mode: "cors",
+      headers: userToken && {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
+      },
       body: JSON.stringify({
-        amount: Number(Math.round(appContext.cart.total + "e2") + "e-2"),
-        dishes: appContext.cart.items,
-        address: data.address,
-        city: data.city,
-        state: data.state,
-        token: token.token.id,
+        data: {
+          amount: Number(Math.round(appContext.cart.total + "e2") + "e-2"),
+          dishes: appContext.cart.items,
+          address: data.address,
+          city: data.city,
+          state: data.state,
+          token: token.token.id,
+        },
       }),
     });
 
@@ -64,7 +88,7 @@ function CheckoutForm(props) {
       setTimeout(() => {
         router.push("/");
         props.setSuccess(false);
-      }, 5000);
+      }, 4000);
     }
 
     // OTHER stripe methods you can use depending on app
