@@ -75,6 +75,9 @@ function MyApp(props) {
   };
   removeItem = (item) => {
     let { items } = state.cart;
+    console.log(":::::Item:::::")
+
+    console.log(item)
     //check for item already in cart
     const foundItem = items.find((i) => i.id === item.id);
     if (foundItem.quantity > 1) {
@@ -94,7 +97,7 @@ function MyApp(props) {
       console.log(`Try remove item ${JSON.stringify(foundItem)}`);
       const index = items.findIndex((i) => i.id === foundItem.id);
       items.splice(index, 1);
-      var newCart = { items: items, total: state.cart.total - item.price };
+      var newCart = { items: items, total: state.cart.total - item.attributes.price };
     }
     setTotalItems((totalItems -= 1));
     setState({ cart: newCart });
