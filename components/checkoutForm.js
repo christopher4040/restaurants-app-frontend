@@ -38,8 +38,8 @@ function CheckoutForm(props) {
     // // e.g. createToken - https://stripe.com/docs/js/tokens_sources/create_token?type=cardElement
     // get token back from stripe to process credit card
     const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
-    // const PAGE_URL = "https://restaurants-app-frontend-jnjwc9kdm-christopher4040.vercel.app";
-    const PAGE_URL = "http://localhost:3000";
+    const PAGE_URL = "https://restaurants-app-frontend-jnjwc9kdm-christopher4040.vercel.app";
+    // const PAGE_URL = "http://localhost:3000";
 
     const token = await stripe.createToken(cardElement);
     const userToken = Cookies.get("token");

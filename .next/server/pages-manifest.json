@@ -3,5 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/restaurant/[restaurantID]": "pages/restaurant/[restaurantID].js",
-  "/": "pages/index.js"
+  "/": "pages/index.js",
+  "/api/chargeStripe": "pages/api/chargeStripe.js"
 }
