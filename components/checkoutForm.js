@@ -17,7 +17,9 @@ function CheckoutForm(props) {
   const [error, setError] = useState("");
   const stripe = useStripe();
   const elements = useElements();
-  const appContext = useContext(AppContext);
+  // const appContext = useContext(AppContext);
+
+  let { cart, user, clearCart } = useContext(AppContext);
 
   function onChange(e) {
     // set the key = to the name property equal to the value typed
@@ -36,28 +38,26 @@ function CheckoutForm(props) {
     // // e.g. createToken - https://stripe.com/docs/js/tokens_sources/create_token?type=cardElement
     // get token back from stripe to process credit card
     const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
-    const PAGE_URL = "https://restaurants-app-frontend-jnjwc9kdm-christopher4040.vercel.app";
+    // const PAGE_URL = "https://restaurants-app-frontend-jnjwc9kdm-christopher4040.vercel.app";
+    const PAGE_URL = "http://localhost:3000";
 
     const token = await stripe.createToken(cardElement);
     const userToken = Cookies.get("token");
 
     // Charge Stripe
-    const chargeResponse = await fetch(
-      `${PAGE_URL}/api/chargeStripe`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${userToken}`,
+    const chargeResponse = await fetch(`${PAGE_URL}/api/chargeStripe`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
+      },
+      body: JSON.stringify({
+        data: {
+          amount: Number(Math.round(cart.total + "e2") + "e-2"),
+          user: user ? user.email : "Guest",
         },
-        body: JSON.stringify({
-          data: {
-            amount: Number(Math.round(appContext.cart.total + "e2") + "e-2"),
-            user: appContext.user ? appContext.user.email : 'Guest',
-          },
-        }),
-      }
-    );
+      }),
+    });
 
     const response = await fetch(`${API_URL}/api/orders`, {
       method: "POST",
@@ -68,8 +68,8 @@ function CheckoutForm(props) {
       },
       body: JSON.stringify({
         data: {
-          amount: Number(Math.round(appContext.cart.total + "e2") + "e-2"),
-          dishes: appContext.cart.items,
+          amount: Number(Math.round(cart.total + "e2") + "e-2"),
+          dishes: cart.items,
           address: data.address,
           city: data.city,
           state: data.state,
@@ -87,7 +87,9 @@ function CheckoutForm(props) {
       props.setLoading(true);
 
       props.setSuccess(true);
+
       setTimeout(() => {
+        clearCart();
         router.push("/");
         props.setSuccess(false);
       }, 4000);

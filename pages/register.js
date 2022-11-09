@@ -84,7 +84,7 @@ const Register = () => {
                   {Object.keys(error).length > 0 && (
                     <div style={{ marginBottom: 10 }}>
                       <small style={{ color: "red" }}>
-                        {error.response.data.message}
+                        {error.response.data.error.message}
                       </small>
                     </div>
                   )}

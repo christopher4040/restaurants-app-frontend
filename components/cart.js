@@ -25,6 +25,7 @@ function Cart(props) {
     // console.log(`Total Items: ${totalItems}`);
 
     var itemList = cart.items.map((item) => {
+      
       if (item.quantity > 0) {
         return (
           <>

@@ -20,14 +20,14 @@ import Cart from "../components/cart";
 import {useRouter} from "next/router";
 
 const Layout = (props) => {
-  const title = "Restaurants";
-  const { cart, user, setUser, totalItems } = useContext(AppContext);
+  const title = "QuickFood";
+  const { cart, user, setUser, totalItems, setRestaurant } = useContext(AppContext);
   const router = useRouter();
   // Navbar
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
-  function goToHome() {router.push('/');}
+  function goToHome() {setRestaurant({});router.push('/');}
 
   const closeBtn = (
     <Button
@@ -84,7 +84,7 @@ const Layout = (props) => {
         </style>
         <Navbar light style={{ borderBottom: "solid 1px rgba(0,0,0,.125)" }}>
           <Container>
-            <NavbarBrand className="me-auto fw-bold" style={{color: "rgba(0, 0, 0, .8)"}} href="javascript:void(0)" onClick={() => goToHome()}>Restaurants</NavbarBrand>
+            <NavbarBrand className="me-auto fw-bold" style={{color: "rgba(0, 0, 0, .8)", fontSize: "28px"}} href="javascript:void(0)" onClick={() => goToHome()}>{title}</NavbarBrand>
 
             { router.pathname !== '/checkout' ?  
             <NavItem className="me-2 d-flex">
@@ -150,7 +150,7 @@ const Layout = (props) => {
                       logout();
                     }}
                   >
-                    Logout
+                    Log out
                   </NavLink>
                 </Button>
               ) : (

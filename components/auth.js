@@ -27,6 +27,7 @@ export const registerUser = (username, email, password) => {
       })
       .catch((error) => {
         //reject the promise and pass the error object back to the form
+        console.log(error.response.data.error.message)
         reject(error);
       });
   });

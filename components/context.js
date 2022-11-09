@@ -11,6 +11,7 @@ const AppContext = React.createContext(
         dishes: [],
         addItem:()=>{},
         removeItem:()=>{},
+        clearCart:()=> {},
         user:false, 
         setUser:()=>{},
         totalItems:0,

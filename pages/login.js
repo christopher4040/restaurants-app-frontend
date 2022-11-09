@@ -52,7 +52,7 @@ function Login(props) {
                     />
                   </FormGroup>
                   <br></br>
-                  <FormGroup>
+                  <FormGroup style={{ marginBottom: 30 }}>
                     <Label>Password:</Label>
                     <Input
                       onChange={(event) => onChange(event)}
@@ -63,11 +63,10 @@ function Login(props) {
                   {Object.keys(error).length > 0 && (
                     <div style={{ marginBottom: 10 }}>
                       <small style={{ color: "red" }}>
-                        {error.response.data.message}
+                        {error.response.data.error.message}
                       </small>
                     </div>
                   )}
-                  <br></br>
                   <br></br>
                   <FormGroup>
                     <Button

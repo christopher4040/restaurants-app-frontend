@@ -6,7 +6,7 @@ import Layout from "../components/layout";
 import Cookie from "js-cookie";
 
 function MyApp(props) {
-  var { cart, addItem, removeItem } = useContext(AppContext);
+  var { cart, addItem, removeItem, clearCart } = useContext(AppContext);
   const [state, setState] = useState({ cart: cart });
   const [dishes, setDishes] = useState([]);
   const { Component, pageProps } = props;
@@ -26,6 +26,8 @@ function MyApp(props) {
   //   // console.log("Data ::::::::" + data)
   //   if ( data !== null ) setState({ cart: JSON.parse(data)});
   // }, [])
+
+  if (state.cart.total === 0 && totalItems !== 0) setTotalItems(0) 
   
   addItem = (item) => {
     let { items } = state.cart;
@@ -98,6 +100,11 @@ function MyApp(props) {
     setState({ cart: newCart });
   };
 
+  clearCart = () => {
+    setState({ cart: { items: [], total: 0 }})
+    setTotalItems(0);
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -105,6 +112,7 @@ function MyApp(props) {
         dishes: dishes,
         addItem: addItem,
         removeItem: removeItem,
+        clearCart: clearCart,
         isAuthenticated: false,
         user: user,
         setUser: setUser,

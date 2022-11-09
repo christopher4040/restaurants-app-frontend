@@ -21,29 +21,37 @@ function Restaurant() {
   const link = new HttpLink({ uri: `${API_URL}/graphql` });
   const cache = new InMemoryCache();
   const client = new ApolloClient({ link, cache });
-  const {restaurant, setRestaurant} = useContext(AppContext);
-  const [name, setName] = useState('')
+  const { restaurant, setRestaurant } = useContext(AppContext);
+  const [name, setName] = useState("");
 
   // useEffect(() => {
   //   window.localStorage.setItem('RESTAURANT', JSON.stringify(restaurant));
   // }, [restaurant])
   useEffect(() => {
-    console.log(":::::: Restaurant ::::::")
-    console.log(restaurant)
-    console.log(restaurant.attributes.name)
-    setName(restaurant.attributes.name);
+    console.log(":::::: Restaurant ::::::");
+    if (restaurant.attributes) {
+      console.log(restaurant.attributes.name);
+      setName(restaurant.attributes.name);
+    }
+
     // const data = window.localStorage.getItem('RESTAURANT');
     // console.log("Data ::::::::" + data)
     // if ( data !== null ) setRestaurant(JSON.parse(data));
-  }, [restaurant])
+  }, [restaurant]);
   const renderDishes = () => {
-    return <Dishes restaurantID={restaurantID} search={query}></Dishes>
+    return <Dishes restaurantID={restaurantID} search={query}></Dishes>;
   };
 
   return (
     <ApolloProvider client={client}>
       <Container style={{ display: "flex", marginTop: "20px" }}>
-        <a style={{ alignSelf: "center" }} href="javascript:void(0)" onClick={() => {setRestaurant({}), router.push("/")}}>
+        <a
+          style={{ alignSelf: "center" }}
+          href="javascript:void(0)"
+          onClick={() => {
+            setRestaurant({}), router.push("/");
+          }}
+        >
           <ion-icon
             size="large"
             name="arrow-back-outline"
@@ -56,24 +64,27 @@ function Restaurant() {
             }}
           ></ion-icon>
         </a>
-        <h3 style={{ marginTop: "10px", marginLeft: 0, color: "rgba(0,0,0,.8)" }}>{name}</h3>
+        <h3
+          style={{ marginTop: "10px", marginLeft: 0, color: "rgba(0,0,0,.8)" }}
+        >
+          {name}
+        </h3>
       </Container>
       <Container>
         <h3></h3>
       </Container>
       <Container className="mt-5">
-      <div className="search my-5">
-        <h6 className="text-center">Search for dishes</h6>
-        <InputGroup className="mx-auto" style={{ maxWidth: "600px" }}>
-          <InputGroupText addontype="append"> Search </InputGroupText>
-          <Input
-            onChange={(e) => setQuery(e.target.value.toLocaleLowerCase())}
-            value={query}
-          />
-        </InputGroup>
-      </div>
-      <Row xs="3">{renderDishes()}</Row>
-
+        <div className="search my-5">
+          <h6 className="text-center">Search for dishes</h6>
+          <InputGroup className="mx-auto" style={{ maxWidth: "600px" }}>
+            <InputGroupText addontype="append"> Search </InputGroupText>
+            <Input
+              onChange={(e) => setQuery(e.target.value.toLocaleLowerCase())}
+              value={query}
+            />
+          </InputGroup>
+        </div>
+        <Row xs="3">{renderDishes()}</Row>
       </Container>
     </ApolloProvider>
   );
