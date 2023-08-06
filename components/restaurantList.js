@@ -21,7 +21,7 @@ function RestaurantList(props) {
   const [restaurantID, setRestaurantID] = useState(-1);
 
   useEffect(() => {
-    console.log("::::: Restaurant :::::")
+    console.log("::::: Restaurants :::::")
     console.log(restaurant)
     if (Object.keys(restaurant).length > 0) {
       window.localStorage.setItem("RESTAURANT", JSON.stringify(restaurant));
